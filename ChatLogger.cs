@@ -11,7 +11,7 @@ namespace ChatLogger
     {
         public override string ModuleName => "Chat Logger";
         public override string ModuleAuthor => "E!N";
-        public override string ModuleVersion => "v1.0.0";
+        public override string ModuleVersion => "v1.0.1";
 
         public ChatLoggerConfig Config { get; set; } = new();
         private readonly HttpClient _httpClient;
@@ -81,7 +81,7 @@ namespace ChatLogger
             }
         }
 
-        private static bool ShouldProcessMessage(CCSPlayerController? player, CommandInfo info)
+        private bool ShouldProcessMessage(CCSPlayerController? player, CommandInfo info)
         {
             return player != null
                 && player.IsValid
@@ -91,9 +91,9 @@ namespace ChatLogger
                 && !IsCommand(info.GetArg(1));
         }
 
-        private static bool IsCommand(string message)
+        private bool IsCommand(string message)
         {
-            char[] commandPrefixes = ['!', '@', '/', '.'];
+            List<string> commandPrefixes = Config.CommandPrefixes;
             return commandPrefixes.Any(message.StartsWith)
                 || message.Equals("rtv", StringComparison.OrdinalIgnoreCase);
         }
