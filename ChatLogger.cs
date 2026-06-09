@@ -11,7 +11,7 @@ namespace ChatLogger
     {
         public override string ModuleName => "Chat Logger";
         public override string ModuleAuthor => "E!N";
-        public override string ModuleVersion => "v1.0.1";
+        public override string ModuleVersion => "v1.0.2";
 
         public ChatLoggerConfig Config { get; set; } = new();
         private readonly HttpClient _httpClient;
@@ -87,7 +87,7 @@ namespace ChatLogger
                 && player.IsValid
                 && !player.IsBot
                 && !player.IsHLTV
-                && player.Connected == PlayerConnectedState.PlayerConnected
+                && player.Connected == PlayerConnectedState.Connected
                 && !IsCommand(info.GetArg(1));
         }
 
